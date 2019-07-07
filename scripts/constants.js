@@ -8,10 +8,9 @@
         BULLET: {
             HEIGHT: 30,
             WIDTH: 20,
-            SPEED: -5,
+            SPEED: 5,
         },
         ENEMY: {
-
             HEIGHT: 50,
             WIDTH: 50,
         },

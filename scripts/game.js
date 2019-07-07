@@ -133,8 +133,7 @@
         }
 
         _updatePositions() {
-            const {SPEED: enemySpeed} = SIZES.ENEMY;
-            const {width, height} = this.bounds;
+            const {width} = this.bounds;
             this.redTankBullets.forEach(bullet => {
                 bullet.left += bullet.speed;
                 bullet.isDead = bullet.left >= width;
@@ -143,8 +142,6 @@
                 bullet.left -= bullet.speed;
                 bullet.isDead = bullet.left <= 0;
             });
-
-
         }
 
         _createNewGameObjects() {
@@ -153,7 +150,7 @@
                 this.enemies.push(enemy);
             }
             if (trueOrFalse(0.3)) {
-                const object = ["apple", "banana", "kiwi","orange"];
+                const object = ["apple", "banana", "kiwi", "orange"];
                 let randomIndex = Math.floor(Math.random() * 5);
                 const fruit = this.gameObjectsFactory.createRandomObject(object[randomIndex]);
                 this.fruits.push(fruit);
@@ -168,7 +165,6 @@
                     if (bullet.isDead || enemy.isDead) {
                         return;
                     }
-
                     const enemyCollisionBox = getCollisionBox(enemy, SIZES.ENEMY);
                     const hasCollision = this.collisionDetector.checkForCollision(bulletCollisionBox, enemyCollisionBox);
                     if (hasCollision) {
@@ -200,9 +196,7 @@
         }
 
         _checkForBlueBulletsWithRedTankCollisions() {
-
             const {blueTankBullets, redTank} = this;
-
             const RedTankCollisionBox = getCollisionBox(redTank, SIZES.TANK);
             blueTankBullets.forEach(bullet => {
                 if (bullet.isDead) {
@@ -214,16 +208,12 @@
                     bullet.isDead = hasCollision;
                     redTank.health -= bullet.power;
                     this.blueTank.points += 10;
-
                 }
             });
-
         }
 
         _checkForRedBulletsWithBlueTankCollisions() {
-
             const {redTankBullets, blueTank} = this;
-
             const BlueTankCollisionBox = getCollisionBox(blueTank, SIZES.TANK);
             redTankBullets.forEach(bullet => {
                 if (bullet.isDead) {
@@ -235,21 +225,18 @@
                     bullet.isDead = hasCollision;
                     blueTank.health -= bullet.power;
                     this.redTank.points += 10;
-
-
                 }
             });
-
         }
-        _checkForRedBulletsWithFruitsCollisions(){
-            const {redTankBullets, fruits,redTank} = this;
+
+        _checkForRedBulletsWithFruitsCollisions() {
+            const {redTankBullets, fruits, redTank} = this;
             redTankBullets.forEach(bullet => {
                 const bulletCollisionBox = getCollisionBox(bullet, SIZES.BULLET);
                 fruits.forEach(fruit => {
                     if (bullet.isDead || fruit.isDead) {
                         return;
                     }
-
                     const fruitCollisionBox = getCollisionBox(fruit, SIZES.FRUIT);
                     const hasCollision = this.collisionDetector.checkForCollision(bulletCollisionBox, fruitCollisionBox);
                     if (hasCollision) {
@@ -257,32 +244,31 @@
                         fruit.isDead = hasCollision;
                         switch (fruit.name) {
                             case"banana":
-                                redTank.speed+=1;
+                                redTank.speed += 1;
                                 break;
                             case"orange":
-                                redTank.bulletCount+=1;
+                                redTank.bulletCount += 1;
                                 break;
                             case"kiwi":
-                                redTank.bulletPower+=10;
+                                redTank.bulletPower += 10;
                                 break;
                             case"apple":
-                                redTank.health+=100;
+                                redTank.health += 100;
                                 break;
                         }
-
                     }
                 });
             });
         }
-        _checkForBlueBulletsWithFruitsCollisions(){
-            const {blueTankBullets, fruits,blueTank} = this;
+
+        _checkForBlueBulletsWithFruitsCollisions() {
+            const {blueTankBullets, fruits, blueTank} = this;
             blueTankBullets.forEach(bullet => {
                 const bulletCollisionBox = getCollisionBox(bullet, SIZES.BULLET);
                 fruits.forEach(fruit => {
                     if (bullet.isDead || fruit.isDead) {
                         return;
                     }
-
                     const fruitCollisionBox = getCollisionBox(fruit, SIZES.FRUIT);
                     const hasCollision = this.collisionDetector.checkForCollision(bulletCollisionBox, fruitCollisionBox);
                     if (hasCollision) {
@@ -290,39 +276,37 @@
                         fruit.isDead = hasCollision;
                         switch (fruit.name) {
                             case"banana":
-                                blueTank.speed+=1;
+                                blueTank.speed += 1;
                                 break;
                             case"orange":
-                                blueTank.bulletCount+=1;
+                                blueTank.bulletCount += 1;
                                 break;
                             case"kiwi":
-                                blueTank.bulletPower+=10;
+                                blueTank.bulletPower += 10;
                                 break;
                             case"apple":
-                                blueTank.health+=100;
+                                blueTank.health += 100;
                                 break;
                         }
-
                     }
                 });
             });
         }
+
         _checkForCollisions() {
-            // bullet with enemy
             this._checkForRedBulletsWithEnemiesCollisions();
             this._checkForBlueBulletsWithEnemiesCollisions();
             this._checkForBlueBulletsWithRedTankCollisions();
             this._checkForRedBulletsWithBlueTankCollisions();
             this._checkForRedBulletsWithFruitsCollisions();
             this._checkForBlueBulletsWithFruitsCollisions();
-            // player with enemy
         }
 
         _removeDeadGameObjects() {
             this.redTankBullets = this.redTankBullets.filter(bullet => !bullet.isDead);
             this.blueTankBullets = this.blueTankBullets.filter(bullet => !bullet.isDead);
             this.enemies = this.enemies.filter(enemy => !enemy.isDead);
-            this.fruits=this.fruits.filter(fruit=>!fruit.isDead);
+            this.fruits = this.fruits.filter(fruit => !fruit.isDead);
         }
 
         updateScoreBoard() {
@@ -391,8 +375,6 @@
                     this._gameLoop();
                 });
             }
-
-
         }
     }
 

@@ -4,10 +4,9 @@
             this.top = top;
             this.left = left;
             this.power = power;
-            this.speed =5;
+            this.speed =SIZES.BULLET.SPEED;
             this.color=color;
-            this.imagePath = "./image/bullet.png"
-        }
+                    }
     }
     scope.Bullet = Bullet;
 })(window);
