@@ -1,0 +1,46 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Tank Game</title>
+    <link rel="stylesheet" href="styles/game.css">
+
+</head>
+<body>
+<div id="score-board">
+
+    <div id="red-player">
+        <div ></div>
+        <div></div>
+        <div ></div>
+        <div></div>
+        <div> </div>
+    </div>
+    <div id="blue-player">
+        <div> </div>
+        <div> </div>
+        <div> </div>
+        <div> </div>
+        <div> </div>
+    </div>
+
+</div>
+<div id="game-container"></div>
+<script src="./scripts/constants.js"></script>
+<script src="scripts/gameObjects/Tank.js"></script>
+<script src="scripts/gameObjects/Bullet.js"></script>
+
+<script src="./scripts/game-objects-factory.js"></script>
+<script src="./scripts/collision-detector.js"></script>
+<script src="./scripts/renderer.js"></script>
+<script src="./scripts/game.js"></script>
+<script>
+    const { Game } = window;
+    const game = new Game('#game-container', 1280, 800);
+    game.start();
+</script>
+</body>
+</html>
